@@ -6,17 +6,27 @@ module.exports.projectDetail = function(req , res){
    // console.log(mongoose.Types.ObjectId.isValid(req.params.id));
    console.log("params",req.params);
    let id = req.params.id;
-    Project.findById(id,function(err , project){
+    Project.findById(id)
+    .populate('issueList')
+    .exec(function(err , project){
         if(err){
             console.log("Error in finding the Project " ,err)
             return ;
         }
+        let isuues = project.issueList;
         return res.render('project_detail',{
-            Project:project
-        })
+            Project:project,
+            Issues:isuues
+        });
     })
 }
-module.exports.addIssue = function(req , res){
+module.exports.addIssue = function(req, res){
+    console.log( "iiiidddddd",req.body.project_id)
+    return res.render('add_issue',{
+     project_id : req.body.project_id}
+    );
+}
+module.exports.createIssue = function(req , res){
     console.log(req.body);
     Issue.create(req.body ,function(err , issue){
            if(err){
@@ -24,7 +34,7 @@ module.exports.addIssue = function(req , res){
                return ;
            }
            let id = req.body.project_id;
-        Project.findById(id,function(err , project){
+        Project.findById(id).populate('issueList').exec(function(err , project){
             project.issueList.push(issue);
             project.save();
             Issue.find({project_id:id} , function(err , issues){

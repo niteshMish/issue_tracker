@@ -5,30 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/project_detail.css">
 </head>
 <body>
    <%if(locals.Project){%>
-       <%= Project.name%>
-      
-
+       <nav id=" isuue-nav-bar">
+        <%= Project.name%>
+       </nav>
+       
       <form action="/project/add-issue" method="post">
-          <input type="text" name="title" placeholder="Title" required>
-          <input type="text" name="description" placeholder="description" required>
-          <input type="text" name="author" placeholder="author" required>
           <input type="hidden" name="project_id" value="<%=Project.id%>">
-          <input type="submit" value="add-issue">
+          <button type="submit">addIsuue</button>
 
       </form>
 
-  <% } %>
-  <%if(locals.Issues){%>
+      
+      <%if(locals.Issues){%>
         <% for(i of Issues){%>
                 <p>
                     <%= i.title%>
                 </p>
         <%}%> 
- <%}%>
- 
+    <%}%>
+    
+<% } %>
+  
+  
+  
   <h4>search issues according to key</h4>
   <a href="/project/search-by-author">author</a>
   <br>
