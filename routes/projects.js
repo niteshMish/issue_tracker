@@ -5,7 +5,7 @@ const projectController = require('../controller/project_controller');
 router.get('/project-detail/:id',projectController.projectDetail);
 router.post('/add-issue' , projectController.addIssue);
 router.post('/create-issue' , projectController.createIssue);
-router.get('/search-by-author' , projectController.searchAuthor);
-router.get('/search-by-title' ,projectController.searchTitle);
+router.get('/issue-search-by-labels' , projectController.SearchByLables);
+
 
 module.exports = router;

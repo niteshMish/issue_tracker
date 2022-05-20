@@ -4,7 +4,7 @@ const mongoose =require('mongoose');
 module.exports.projectDetail = function(req , res){
     
    // console.log(mongoose.Types.ObjectId.isValid(req.params.id));
-   console.log("params",req.params);
+  
    let id = req.params.id;
     Project.findById(id)
     .populate('issueList')
@@ -21,7 +21,7 @@ module.exports.projectDetail = function(req , res){
     })
 }
 module.exports.addIssue = function(req, res){
-    console.log( "iiiidddddd",req.body.project_id)
+   
     return res.render('add_issue',{
      project_id : req.body.project_id}
     );
@@ -42,7 +42,7 @@ module.exports.createIssue = function(req , res){
                     console.log('ERR in finding issues',err);
                     return;
                 }
-                console.log(issues);
+                
                 return res.render('project_detail',{
                     Project:project,
                     Issues:issues
@@ -52,9 +52,41 @@ module.exports.createIssue = function(req , res){
     
     })
 }
-module.exports.searchAuthor = function(req, res){
-    return res.render('project_detail');
-  }
-  module.exports.searchTitle = function(req, res){
-      return res.render('project_detail');
-  }
+
+    module.exports.SearchByLables = function(req ,res){
+        console.log(req.body);
+        if(req.body && req.body.author && req.body.name){
+            Project.find({
+                author:req.body.author,
+                name:req.body.name
+             }).populate('labelId')
+            .exec(function(err ,Projects){
+               
+                return res.render('home',{
+                    Projects:Projects
+                });
+            })
+            
+        }else{
+          if( req.body && req.body.author){
+            Project.find({author:req.body.author }).populate('labelId')
+            .exec(function(err ,Projects){
+                console.log(Projects);
+                return res.render('home',{
+                Projects:Projects
+                });
+            });
+        }else if(req.body && req.body.name){
+            Project.find({name:req.body.name }).populate('labelId')
+            .exec(function(err ,Projects){
+                console.log(Projects);
+                return res.render('home',{
+                Projects:Projects
+                });
+            });
+        }
+      } 
+    }
+   
+  
+ 

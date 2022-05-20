@@ -1,22 +1,45 @@
 body{
-    background-color: antiquewhite;
+    background-color: rgb(246, 242, 237);
     margin: 0px;
+    font-family: sans-serif;
+}
+#search-bar{
+  padding: 15px;
+  margin-left: 15%;
+}
+.search-input{
+  width: 30%;
+  height: 40px;
+  border-radius: 10px;
+  
+}
+.search-input:hover{
+  background-color :lightgray ;
+ 
+  
 }
 #nav-bar{
     width: 100%;
-    background-color: rgb(9, 68, 48);
+    background-color: #344857;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border-radius: 4px;
+   
     
 }
 h1{
     color: aliceblue;
 }
+.nav-button{
+  margin-top: 15px;
+  margin-right:20px ;
+  width: 80px;
+  height: 30px;
+  background-color: aliceblue;
+  border-radius: 4px;
+  color: rgb(26, 23, 23);
+}
 .buttons{
-    margin-top: 15px;
-    margin-right:50px ;
     width: 80px;
     height: 30px;
     background-color: aliceblue;
@@ -24,19 +47,74 @@ h1{
     color: rgb(26, 23, 23);
 }
 .buttons:hover{
- background-color: aquamarine;
+ background-color: rgb(130, 175, 234);
 }
 table{
-      width: 100%;
-      
+    width: 90%;
+    border-collapse: collapse;
+    margin-top: 3px;
+    margin-left: 5%;
 }
-table, td {
-    background-color: whitesmoke;
-    border:1px solid black;
+td {
+    background-color: rgb(226, 239, 243);
+    /* border:1px solid black; */
     border-radius: 2px;
     text-align: center;
   } 
   th{
-    background-color: rgb(19, 26, 127);  
+    background-color: #7f98aa;  
     color: whitesmoke;
+    padding-top: 8px;
+    padding-bottom: 8px;
   }
+  #tr-tag{
+    border:1px solid white;
+    background-color: rgb(36, 32, 32);
+    margin-top: 2px;
+  }
+  /* Dropdown Button */
+.dropbtn {
+    width: 100px;
+    background-color: #828886;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content input {
+    /* color: black; */
+    width:150px;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content input:hover {background-color: #ddd;border: none;}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {background-color: #3e8e41;}
+  

@@ -1,7 +1,69 @@
 body{
-    background-color: rgb(182, 182, 121);
+    background-color: rgb(246, 242, 237);
+    margin: 0px;
+    font-family: sans-serif;
 }
 #issue-nav-bar{
-   width: 100%;
-   background-color: rgb(66, 66, 105); 
+    width: 100%;
+    background-color: #344857;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+   
+}
+.issue-butt{
+    margin-top: 17px;
+    margin-right:20px ;
+    width: 80px;
+    height: 30px;
+    background-color: aliceblue;
+    border-radius: 4px;
+    color: rgb(26, 23, 23);
+}
+#search-bar{
+    padding: 15px;
+    margin-left: 15%;
+  }
+  .search-input{
+    width: 30%;
+    height: 40px;
+    border-radius: 10px;
+    
+  }
+  .search-input:hover{
+    background-color :lightgray ;
+   
+    
+  }
+table{
+    width: 90%;
+    border-collapse: collapse;
+    margin-top: 3px;
+    margin-left: 5%;
+    
+}
+td {
+    background-color: rgb(226, 239, 243);
+    /* border:1px solid black; */
+    border-radius: 2px;
+    text-align: center;
+} 
+th{
+    background-color: #7f98aa;  
+    color: whitesmoke;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+tr{
+    border:1px solid white;
+    background-color: rgb(36, 32, 32);
+    margin-top: 2px;
+}
+#home-link{
+    
+    color:azure;
+    font-size: 20px;
+}
+#homeLink{
+    margin-top: 20px;
 }

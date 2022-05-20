@@ -8,34 +8,52 @@
     <link rel="stylesheet" href="/css/project_detail.css">
 </head>
 <body>
+   
    <%if(locals.Project){%>
-       <nav id=" isuue-nav-bar">
-        <%= Project.name%>
+       <nav id="issue-nav-bar">
+            <h1><%= Project.name%></h1> 
+            <div id="homeLink"><a id="home-link" href="/">home</a></div>
+            <div>
+                    <form action="/project/add-issue" method="post">
+                        <input type="hidden" name="project_id" value="<%=Project.id%>">
+                        <button class="issue-butt" type="submit">addIsuue</button>
+            
+                    </form>
+            </div>
+            
        </nav>
-       
-      <form action="/project/add-issue" method="post">
-          <input type="hidden" name="project_id" value="<%=Project.id%>">
-          <button type="submit">addIsuue</button>
-
+      <div id="search-bar">
+       <form action="/issue-search-by-labels" method="post">
+         <input class="search-input" type="text" name="author" placeholder="Author">
+         <input class="search-input" type="text" name="name" placeholder="Name">
+         <input type="submit" value="search">
       </form>
-
-      
-      <%if(locals.Issues){%>
+    </div>
+    <%if(locals.Issues){%>
+        <table>
+            <tr>
+                <th>Issue Name</th>
+                <th>Author</th>
+                <th>Status</th>
+            </tr>
         <% for(i of Issues){%>
-                <p>
-                    <%= i.title%>
-                </p>
+               <tr>
+                   <td><%= i.title%></td>
+                   <td><%= i.author%></td>
+                   <td><%= i.description%></td>
+               </tr>
+                    
+               
         <%}%> 
+    </table>
     <%}%>
     
 <% } %>
   
   
   
-  <h4>search issues according to key</h4>
-  <a href="/project/search-by-author">author</a>
-  <br>
-  <a href="/project/search-by-title">title</a>
+  
+    
   
 
 

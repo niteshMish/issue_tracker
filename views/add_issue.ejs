@@ -5,15 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/add_issue.css">
 </head>
 <body>
+    <nav id="nav-form-id">
+        <p>project add form </p>
+    </nav>
+    <div id="form-container">
+        <nav id="nav-bar" ><p>form</p></nav>
     <form action="/project/create-issue" method="post">
-        <input type="text" name="title" placeholder="Title" required>
-        <input type="text" name="description" placeholder="description" required>
-        <input type="text" name="author" placeholder="author" required>
-        <input type="hidden" name="project_id" value="<%=project_id%>">
-        <input type="submit" value="add-issue">
-
-    </form>
+        <p> Title:</p>
+        <input class="input-sec" type="text" name="title" placeholder="Title" required>
+        <p> Description:</p>
+        <input class="input-sec" type="text" name="description" placeholder="description" required>
+        <p> Author:</p>
+        <input class="input-sec" type="text" name="author" placeholder="author" required>
+        <input class="input-sec" type="hidden" name="project_id" value="<%=project_id%>">
+        <input type="hidden" value ="label" >
+        <label for="label">Labels you want to choose for project</label><br>
+        <select id="lable" name="label" size="7" multiple>
+        <option value="done">Done</option>
+        <option value="notDone">notDone</option>
+        <option value="suspended">suspended</option>
+       
+        </select>   
+        <br>
+        <input class="input-sec-butt" type="submit" value="add-issue">
+   </form>
+</div>
 </body>
 </html>

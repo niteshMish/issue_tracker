@@ -1,0 +1,36 @@
+body{
+    margin: 0px;
+    background-color:lightgray;
+}
+
+#nav-form-id{
+    margin: 0px;
+    background-color: rgb(25, 25, 57);
+    height: 50px;
+}
+#nav-bar{
+    background-color: rgb(25, 25, 57);
+}
+
+#form-container{
+    margin: 0px;
+    width: 405px;
+    height: 400px;
+    align-items: center;
+    background-color: white;
+   
+    border-radius: 5px;
+}
+.input-sec{
+    margin:2%;
+    width: 95%;
+    border-radius: 4px;
+}
+.input-sec-butt{
+    margin:2%;
+    border-radius: 4px;
+}
+.input-sec-butt:hover{
+   background-color: rgb(88, 85, 111);
+   color:white;
+}

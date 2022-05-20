@@ -1,0 +1,49 @@
+body{
+    margin: 0px;
+   
+    background-color:lightgray;
+}
+
+#nav-form-id{
+    margin-top: -16px;
+    background-color: rgb(25, 25, 57);
+    height: 50px;
+    color:aliceblue;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around ;
+}
+#nav-bar{
+    background-color: rgb(25, 25, 57);
+    margin-top: -16px;
+    width: 100%;
+    color:aliceblue;
+}
+
+#form-container{
+    margin-top: 2%;
+    margin-left:25% ;
+    width: 40%;
+    height: 80vh;
+    align-items: center;
+    background-color: white;
+    float:left;
+     
+    padding-left: 5%;
+    padding-right: 5%;
+   
+    border-radius: 5px;
+}
+.input-sec{
+  
+    width: 95%;
+    border-radius: 4px;
+}
+.input-sec-butt{
+    margin:2%;
+    border-radius: 4px;
+}
+.input-sec-butt:hover{
+   background-color: rgb(88, 85, 111);
+   color:white;
+}
