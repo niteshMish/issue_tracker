@@ -4,59 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <link rel="stylesheet" href="/css/project_detail.css">
+    <title>Document</title>
 </head>
 <body>
-   
-   <%if(locals.Project){%>
-       <nav id="issue-nav-bar">
-            <h1><%= Project.name%></h1> 
-            <div id="homeLink"><a id="home-link" href="/">home</a></div>
-            <div>
-                    <form action="/project/add-issue" method="post">
-                        <input type="hidden" name="project_id" value="<%=Project.id%>">
-                        <button class="issue-butt" type="submit">addIsuue</button>
-            
-                    </form>
-            </div>
-            
-       </nav>
-      <div id="search-bar">
-       <form action="/issue-search-by-labels" method="post">
-         <input class="search-input" type="text" name="author" placeholder="Author">
-         <input class="search-input" type="text" name="name" placeholder="Name">
-         <input type="submit" value="search">
-      </form>
+    <div id="nav-bar">
+    <nav > project details</nav>
+    <div>
+        <form action="/project/add-issue" method="post">
+            <input type="hidden" name="project_id" value="<%=Project.id%>">
+            <button class="issue-butt" type="submit">addIsuue</button>
+        </form>
     </div>
-    <%if(locals.Issues){%>
-        <table>
-            <tr>
-                <th>Issue Name</th>
-                <th>Author</th>
-                <th>Status</th>
-            </tr>
-        <% for(i of Issues){%>
-               <tr>
-                   <td><%= i.title%></td>
-                   <td><%= i.author%></td>
-                   <td><%= i.description%></td>
-               </tr>
-                    
-               
-        <%}%> 
-    </table>
+    <form action="/project/filter" method="post">
+        <select name="label" id="label" multiple a>
+             <%for(i of Issues){%>
+                <%for(label of i.labelsList){%>
+                     <option value=" <%=label%>"> <%=label%></option>
+                 <%}%>
+             <%}%>
+         </select>
+         <input type="text" name="author" placeholder="Author">
+         <input type="hidden" name="project_id" value="<%=Project._id%>">
+         <input type="submit" value="filter">
+     </form>
+   </div>
+   <p><%=Project.name%></p> 
+   
+   
+<%if(locals.Issues){%>
+    
+        <%for(i of Issues){%>
+          <div id="div-container-detail">
+            <div>
+                <%=i.title%>
+            </div>
+           
+            <div>
+                <%for(label of i.labelsList){%>
+                  <%=label%>
+               <%}%>
+            </div>
+         </div>  
+        <%}%>
     <%}%>
     
-<% } %>
-  
-  
-  
-  
-    
-  
-
-
-  
 </body>
 </html>

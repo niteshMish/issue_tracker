@@ -1,0 +1,41 @@
+<%if(locals.Issues){%>
+    <table>
+        <tr>
+            <th>Issue Name</th>
+            <th>Author</th>
+            <th>Status</th>
+        </tr>
+       
+    <% for(i of Issues){%>
+           <tr>
+               <td><%= i.title%></td>
+               <td><%= i.author%></td>
+               <td> <div class="dropdown">
+                                <button class="dropbtn">
+                                    <%if( i.labels.resolved){%>
+                                        Resolved
+                                     <%}else{%> 
+                                        unResolved
+                                     <%}%>  
+                                </button>
+                                <div class="dropdown-content">
+                        
+                                  <form action="/project/update-issue-label" class="update-issue" method="post">
+                                      <input type="hidden" value="<%=i.id%>" name="issue_id">
+                                      <input type="hidden" value="resolved" name="label">
+                                      <input type="hidden" value="<%= i.project_id %>" name="project_id">
+                                      <input type="submit" value="resolved">
+                                  </form>
+                                  <form action="/project/update-issue-label" class="update-issue" method="post">
+                                    <input type="hidden" value="<%=i.id%>" name="issue_id">
+                                    <input type="hidden" value="unResolved" name="label">
+                                    <input type="hidden" value="<%= i.project_id %>" name="project_id">
+                                    <input type="submit" value="unResolved">
+                                </form>
+                            </div>
+                       </div>
+                    </td>
+           </tr>
+    <%}%> 
+</table>
+<%}%>

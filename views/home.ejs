@@ -8,85 +8,47 @@
     <link rel="stylesheet" href="/css/home.css">
 </head>
 <body>
+   <div id="nav-container">
     <nav id="nav-bar">
-        <h1>Home-Page</h1>
-        <div id="add-project-button">
-            <form action="/add-project" method="get">
-                <button class="nav-button" type="submit"  id="add-butt">add</button>
-            </form>
-        </div>
+       <p id="text-id">Issue Tracker</p> 
     </nav>
-   
-    <div id="search-bar">
-    <form action="/project-search-by-lables" method="post">
-       <input class="search-input" type="text" name="author" placeholder="Author">
-       <input  class="search-input" type="text" name="name" placeholder="Name">
-       <input  type="submit" value="search">
-    </form>
-   </div>
-  <%if(locals.Projects){%>
+    <div id="add-form" >
+        <form action="/add-project" method="get">
+            <input id="add-input-type" type="submit" value="add..">
+        </form>
 
+    </div>
+</div>
 
+   <%if(locals.Projects){%> 
+    <table>
+        <th>
+            Project List
+        </th>
+    </table>  
     <table>
         <tr>
-            <th>Project Name</th>
-            <th>Author</th>
-            <th>Status</th>
-            <th>Project-Detail</th>
+            <th>Name of Project</th>
+            <th>Author Name</th>
+            <th>Details</th>
         </tr>
         
-        <%for( p of Projects){%>
+     <%for(p of Projects){%>
             
-            <tr id="tr-tag">
-                <td> <%= p.name%></td>  
-                   <td><%=p.author%></td> 
-                   <td><%for( let i = 0 ; i < p.labelId.labelsList.length; i++ ){%>
-                             <%if( p.labelId.labelsList[i].labelStatus){ %> 
-                               
-                                <div class="dropdown">
-                                    <button class="dropbtn"> <%= p.labelId.labelsList[i].labelName%></button>
-                                    <div class="dropdown-content">
-                            
-                                      <form action="/update-project-label" method="get">
-                                          <input type="hidden" value="<%=p.id%>" name="project_id">
-                                          <input type="hidden" value="done" name="label">
-                                          <input type="submit" value="Done">
-                                      </form>
-                                      <form action="/update-project-label" method="get">
-                                        <input type="hidden" value="<%=p.id%>" name="project_id">
-                                        <input type="hidden" value="notDone" name="label">
-                                        <input type="submit" value="notDone">
-                                    </form>
-                                    <form action="/update-project-label" method="get">
-                                        <input type="hidden" value="<%=p.id%>" name="project_id">
-                                        <input type="hidden" value="suspended" name="label">
-                                        <input type="submit" value="suspended">
-                                    </form>
-                                    </div>
-                                  </div>  
-                              
-                             <%}%>
-                    <%}%>
-                   
-                  </td> 
-                   <td>
-                       <form action="/project/project-detail/<%=p._id%>"> 
-                           <button  class="buttons" type="detail">detail</button>
-                       </form>
-                    
-                   </td> 
-                   
-            </tr>
-           
-            
-        <%}%>
-        
-    </table>
-<%}%>
-
-
-   
+                <tr id="tr-tag">
+                     <td> <%=p.name%></td>
+                     <td><%= p.author%></td>
+                     <td>
+                        <form action="/project/detail" method="post">
+                            <input type="hidden" name="project_id" value="<%=p._id%>">
+                            <input type="submit" value="detail">
+                        </form>
+                     </td>
+                     
+                </tr>
+            <%}%>
+        </table>    
     
-    
+    <%}%>
 </body>
 </html>

@@ -17,19 +17,12 @@
         <nav id="nav-bar" ><p>form</p></nav>
         <form action="/create-project" method="post">
             <p> Description :</p>
-            <p><input class="input-sec" type="text" name="description" placeholder=" Description" required></p> 
+            <p><input class="input-sec" type="textaera" name="description" placeholder=" Description" required></p> 
             <p> Name :</p>
         <p><input class="input-sec" type="text" name="name" placeholder=" Name" required></p> 
         <p> Author Name :</p>
         <p><input class="input-sec" type="text" name="author" placeholder="Author_name" required></p> 
-        <input type="hidden" value ="label" >
-        <label for="label">Labels you want to choose for project</label><br>
-        <select id="lable" name="label" size="7" multiple>
-        <option value="done">Done</option>
-        <option value="notDone">notDone</option>
-        <option value="suspended">suspended</option>
-       
-        </select>
+        
         <br>
         <p> <input class="input-sec-butt"  type="submit" placeholder="add.."></p>
         </form>

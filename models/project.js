@@ -13,11 +13,6 @@ const projectSchema = new mongoose.Schema({
         type:String , 
         required:true
     },
-    labelId:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Label'
-    }
-    ,
     issueList:[{
          type:mongoose.Schema.Types.ObjectId,
          ref:'Issue'

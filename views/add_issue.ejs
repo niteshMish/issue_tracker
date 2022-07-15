@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/add_issue.css">
 </head>
 <body>
@@ -21,17 +22,17 @@
         <p> Author:</p>
         <input class="input-sec" type="text" name="author" placeholder="author" required>
         <input class="input-sec" type="hidden" name="project_id" value="<%=project_id%>">
-        <input type="hidden" value ="label" >
-        <label for="label">Labels you want to choose for project</label><br>
-        <select id="lable" name="label" size="7" multiple>
-        <option value="done">Done</option>
-        <option value="notDone">notDone</option>
-        <option value="suspended">suspended</option>
-       
-        </select>   
-        <br>
+        <select name="labels" class="custom-select" multiple>
+            <option value="bug">bug</option>
+            <option value="enhancement">enhancement</option>
+            <option value="good first issue">good first issue</option>
+            <option value="help wanted">help wanted</option>
+            <option value="question">question</option>
+            <option value="wont fix">wont fix</option>
+        </select>
         <input class="input-sec-butt" type="submit" value="add-issue">
    </form>
 </div>
+
 </body>
 </html>

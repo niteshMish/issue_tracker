@@ -19,13 +19,34 @@ body{
   
 }
 #nav-bar{
+    text-align: center;
+    font-size: x-large;
+    color: white;
     width: 100%;
+    height: 50px;
     background-color: #344857;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
    
     
+}
+#nav-container{
+  display: flex;
+  flex-direction: row;
+
+}
+#add-form{
+  margin-left: -100px;
+}
+#add-input-type{
+  margin-top: 10px ;
+  width: 80px;
+  height: 30px;
+}
+#text-id{
+  margin-top: 7px;
+  margin-left: 5px;
 }
 h1{
     color: aliceblue;
@@ -62,6 +83,8 @@ td {
     text-align: center;
   } 
   th{
+    padding: 20px;
+    margin-bottom: 20px;
     background-color: #7f98aa;  
     color: whitesmoke;
     padding-top: 8px;
