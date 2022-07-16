@@ -5,31 +5,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/project_detail.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
+
     <title>Document</title>
 </head>
 <body>
     <div id="nav-bar">
-    <nav > project details</nav>
-    <div>
-        <form action="/project/add-issue" method="post">
-            <input type="hidden" name="project_id" value="<%=Project.id%>">
-            <button class="issue-butt" type="submit">addIsuue</button>
-        </form>
-    </div>
+    <nav>
+          <a href="/" style="text-decoration: none;"> 
+          <h1> Issue Tracker</h1></a>
+    </nav>
+   
     <form action="/project/filter" method="post">
-        <select name="label" id="label" multiple a>
-             <%for(i of Issues){%>
-                <%for(label of i.labelsList){%>
-                     <option value=" <%=label%>"> <%=label%></option>
-                 <%}%>
-             <%}%>
+        <select name="label" id="label" multiple  class="chosen-select myclass" unique >
+             
+            <option value="bug">bug</option>
+            <option value="enhancement">enhancement</option>
+            <option value="good first issue">good first issue</option>
+            <option value="help wanted">help wanted</option>
+            <option value="question">question</option>
+            <option value="wont fix">wont fix</option>
+                
          </select>
          <input type="text" name="author" placeholder="Author">
          <input type="hidden" name="project_id" value="<%=Project._id%>">
          <input type="submit" value="filter">
      </form>
    </div>
-   <p><%=Project.name%></p> 
+   <div id="search-bar">
+    <form action="/project/issue-search" method="post">
+
+      <input class="search-input" type="text" placeholder="Title of issue" name="title">
+      <input class="search-input" type="text" placeholder="author" name="author">
+      <input class="search-input" type="submit" value="search">
+    </form>
+</div>
+    <div id="project-name-container">
+    <h1  id="project-name"><%=Project.name%> </h1>
+    <div>
+        <form action="/project/add-issue" method="post">
+            <input type="hidden" name="project_id" value="<%=Project.id%>">
+            <button class="issue-butt" type="submit">addIsuue</button>
+        </form>
+    </div>
+   </div>
    
    
 <%if(locals.Issues){%>
@@ -40,14 +61,14 @@
                 <%=i.title%>
             </div>
            
-            <div>
+            <div >
                 <%for(label of i.labelsList){%>
-                  <%=label%>
+                 <span  class="labels-list"><%=label%></span> 
                <%}%>
             </div>
          </div>  
         <%}%>
     <%}%>
-    
+    <script src="/js/project_detail.js"></script>
 </body>
 </html>

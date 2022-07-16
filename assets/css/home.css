@@ -14,8 +14,7 @@ body{
   
 }
 .search-input:hover{
-  background-color :lightgray ;
- 
+  background-color :lightcyan ;
   
 }
 #nav-bar{
@@ -82,6 +81,10 @@ td {
     border-radius: 2px;
     text-align: center;
   } 
+  td:hover{
+    background-color: #344857;
+    color: whitesmoke;
+  }
   th{
     padding: 20px;
     margin-bottom: 20px;

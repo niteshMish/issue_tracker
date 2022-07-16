@@ -3,7 +3,7 @@ let updateLabel = function(){
          
          
          updateForm.submit(function(e){
-         e.preventDefault();
+        //  e.preventDefault();
             $.ajax({
                 type:'post',
                 url:'/project/update-issue-label',

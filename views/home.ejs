@@ -20,6 +20,15 @@
     </div>
 </div>
 
+<div id="search-bar">
+      <form action="/project-search-by-lables" method="post">
+  
+        <input class="search-input" type="text" placeholder="Name of Project" name="name">
+        <input class="search-input" type="text" placeholder="author" name="author">
+        <input class="search-input" type="submit" value="search">
+      </form>
+</div>
+
    <%if(locals.Projects){%> 
     <table>
         <th>

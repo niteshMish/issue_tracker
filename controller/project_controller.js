@@ -5,10 +5,7 @@ const Label = require('../models/labels');
 /// action to show a particuler project deatils
 
 module.exports.projectDetail = function(req , res){
-    
-   // console.log(mongoose.Types.ObjectId.isValid(req.params.id));
-  
-   let id = req.body.project_id;
+    let id = req.body.project_id;
     Project.findById(id)
     .populate('issueList')
     .exec(function(err , project){
@@ -24,13 +21,14 @@ module.exports.projectDetail = function(req , res){
     })
 }
 
-// action to add issue to the the issue list for a project
+// action to add issue to form the the issue list for a project
 module.exports.addIssue = function(req, res){
    
     return res.render('add_issue',{
      project_id : req.body.project_id}
     );
 }
+/// action to add issue to the data base 
  module.exports.createIssue = async function(req , res){
      let issue = await Issue.create({
         title:req.body.title, 
@@ -49,7 +47,7 @@ module.exports.addIssue = function(req, res){
             if(label.length == 0){
                 
                 let l = await Label.create({labelname:lab});
-                console.log("--------->>>> l",l);
+               
                 if(l){
                     l.issueList.push(issue._id);
                     await l.save();
@@ -78,95 +76,15 @@ module.exports.addIssue = function(req, res){
 
 }
 
- }
-// module.exports.createIssue =  async function(req , res){
-//     console.log(req.body)
-//     let labels = req.body.labels;
-//     console.log("labels",labels,labels.length);
-//     Issue.create({
-//           title:req.body.title, 
-//           description:req.body.description,
-//           author:req.body.author,
-//           labelsList:req.body.labels,
-//           project_id:req.body.project_id
-//     },function(err , issue){
-//            if(err){
-//                console.log("Error in creating issue  " , err);
-//                return ;
-//            }
+}
 
-//         //    issue.labelsList = labels;
-//         //    issue.save();
-//            //// iterate over the label  and create  label 
-//            for(li of labels){
-//             console.log( li);
-//            }
-//              for( l of labels){
-//                  Label.find({labelname:l},function(err , label){
-//                     console.log("innnnnnnre label" ,label);
-//                     if(label.length == 0){
-//                         Label.create({labelname:l},function(err , lab){
-//                             if(err){console.log("Error in creating label of issue" , err) ;
-//                             return ;}
-//                             console.log("l------->>>>>>" ,lab);
-//                             lab.issueList.push( issue._id);
-//                             lab.save();
-//                         })
-//                      }else{
-//                         console.log("hiiiiiiiiiiiiiiiiiiiiiiiiii");
-//                         label[0].issueList.push(issue._id);
-//                         label[0].save();
-//                      }
-//                  })
-//              }
-
-//            let id = req.body.project_id;
-//             Project.findById(id).exec(function(err , project){
-//             project.issueList.push(issue);
-//             project.save();
-//             Issue.find({project_id:id} , function(err , issues){
-//                 if(err){
-//                     console.log('ERR in finding issues',err);
-//                     return;
-//                 }
-                
-//                 return res.render('project_detail',{
-//                     Project:project,
-//                     Issues:issues
-//                 })
-//             })
-//         })
-    
-//     })
-// }
-////////
-
-// module.exports.addIssue = function(req , res){
-//     let labels = req.body.labels.split(',');
-//     Issue.create({
-//         title:req.body.title, 
-//         description:req.body.description,
-//         author:req.body.author,
-//         labelsList:labels
-//   } ,function(err , issue ){
-//     for( l of issue.labelsList){
-//         IssueLabel.find({labelname:i})
-//     }
-//   })
-
-// }
-
-
-////////
-
-
-//// action to search issue according to the fields 1 - author , 2 - title,description
+//// action to search issue according to the fields 1 - author , 2 - title
  module.exports.SearchByFields = function(req ,res){
         console.log(req.body);
-        if(req.body && req.body.author && req.body.name){
+        if(req.body && req.body.author && req.body.title){
             Project.find({
                 author:req.body.author,
-                name:req.body.name
+                name:req.body.title
              }).populate('labelId')
             .exec(function(err ,Projects){
                
@@ -184,8 +102,8 @@ module.exports.addIssue = function(req, res){
                 Projects:Projects
                 });
             });
-        }else if(req.body && req.body.name){
-            Project.find({name:req.body.name }).populate('labelId')
+        }else if(req.body && req.body.title){
+            Project.find({name:req.body.title }).populate('labelId')
             .exec(function(err ,Projects){
                 console.log(Projects);
                 return res.render('home',{
@@ -195,7 +113,8 @@ module.exports.addIssue = function(req, res){
         }
       } 
     }
-    /// action to update the status of issue of any project
+/// action to update the status of issue of any project
+
  module.exports.updateStatus = async function(req , res) {
      if(req.query.label === 'resolved'){
          
@@ -232,17 +151,10 @@ module.exports.addIssue = function(req, res){
      })
  } 
 
- // action use to filter the issue according to the labels on it
+ // action use to filter  ,   according to the labels ,and author
  module.exports.filter = async function(req,res){
 
-    //////
-     // map 
-     /// if(label) -> call a method wait
-     // if(author) -> call method wait
-
-
-
-    ///////
+    
     let project_id = req.body.project_id;
     console.log("pro" , project_id);
     let map1 = new Map();
@@ -257,7 +169,7 @@ module.exports.addIssue = function(req, res){
             }
          for( let i = 0 ; i < labelList.length ; i ++){
         console.log( "line no 243 labelList",labelList[i]);
-        let currLabel = labelList[i].substring(1);
+        let currLabel = labelList[i];
         console.log(currLabel.substring(1));
         console.log("curr" , currLabel , typeof(currLabel));
         Label.find({labelname:currLabel} ,function(err ,labelId){
@@ -325,28 +237,7 @@ module.exports.addIssue = function(req, res){
      x();        
        console.log("line no 288  ,  map  size" , map1.size);
     }
-//  
 
-//     let k =0;
-
-//     for( let key of map1.keys()){
-//         list[k++] = key;
-//     }
-//     console.log("List length " , list.length, map1.size);
-//     for(let i = 0 ; i < list.length;i++){
-//         console.log(list[i]);
-//     }
-//     console.log("pro" , project_id);
-//    let proj =  await Project.findById(project_id);
-//    console.log("pro" , proj);
-//    await Project.findById(project_id).populate('list')
-//     .exec(function(err , project){
-//         console.log("project------>", project)
-//         return res.render('project_detail',{
-//             Project:proj,
-//             Issues:list
-//         })
-//     })
     let project1 =  await Project.findById(project_id).populate('issueList');
     console.log("first" , list);
       return res.render('project_detail',{
