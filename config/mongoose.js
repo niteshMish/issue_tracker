@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/issue_tracker_db');
+require('dotenv');
+mongoose.connect(process.env.CONNECT);
 
 
 const db = mongoose.connection;
