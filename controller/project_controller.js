@@ -79,35 +79,71 @@ module.exports.addIssue = function(req, res){
 }
 
 //// action to search issue according to the fields 1 - author , 2 - title
- module.exports.SearchByFields = function(req ,res){
+ module.exports.SearchByFields = async function(req ,res){
         console.log(req.body);
+        let issueList = [];
         if(req.body && req.body.author && req.body.title){
-            Project.find({
+           let issue = await Issue.find({
                 author:req.body.author,
-                name:req.body.title
-             }).populate('labelId')
-            .exec(function(err ,Projects){
-               
-                return res.render('home',{
-                    Projects:Projects
-                });
-            })
+                title:req.body.title
+             }).populate('labelsList');
             
+                console.log(" line no 91 issue" , issue);
+                if( issue && issue.length > 0){
+                    for(let i of issue){
+                        if(i.project_id == req.body.project_id){
+                            issueList.push(i);
+                        }
+                    }
+                }
+                 Project.findById(req.body.project_id).exec(function(err , project){
+                    console.log(issue);
+                    return res.render('project_detail',{
+                    Issues:issueList,
+                    Project:project
+                    });
+                });
         }else{
           if( req.body && req.body.author){
-            Project.find({author:req.body.author }).populate('labelId')
-            .exec(function(err ,Projects){
-                console.log(Projects);
-                return res.render('home',{
-                Projects:Projects
+            console.log("author line no 107" ,typeof(req.body.author) , req.body.author.length );
+           let issue = await Issue.find({author:req.body.author }).populate('labelsList');
+            
+                console.log(" line no 109 issue" , issue);
+                if( issue && issue.length> 0 ){
+                    for(let i of issue){
+                        if(i.project_id == req.body.project_id){
+                            issueList.push(i);
+                        }
+                    }
+                }
+                 Project.findById(req.body.project_id).exec(function(err , project){
+                    console.log(issue);
+                    return res.render('project_detail',{
+                    Issues:issueList,
+                    Project:project
+                    });
                 });
-            });
+            
         }else if(req.body && req.body.title){
-            Project.find({name:req.body.title }).populate('labelId')
-            .exec(function(err ,Projects){
-                console.log(Projects);
-                return res.render('home',{
-                Projects:Projects
+            
+            console.log("title line no 125" ,typeof(req.body.title) , req.body.title.length );
+            let issue =  await Issue.find({ 
+                title:req.body.title})
+                .populate('labelsList');
+           
+                console.log(" line no 125 issue" , issue);
+                if( issue && issue.length > 0){
+                    for(let i of issue){
+                        if(i.project_id == req.body.project_id){
+                            issueList.push(i);
+                        }
+                    }
+                }
+                 Project.findById(req.body.project_id).exec(function(err , project){
+                    console.log(issue);
+                    return res.render('project_detail',{
+                    Issues:issueList,
+                    Project:project
                 });
             });
         }
